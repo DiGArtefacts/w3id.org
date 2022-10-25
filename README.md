@@ -54,7 +54,7 @@ agreement is setup such that a number of these companies could fail,
 lose interest, or become unavailable for long periods of time without
 negatively affecting the operation of the site.
 
-#### Joining the Management consortium 
+#### Joining the Management consortium
 
 To join the management consortium, please make yourself known to the
 W3ID community via participation in the mailing list (see the
@@ -141,6 +141,14 @@ Note that this only checks URIs that are listed in the `README.md` files.
 Travis might comment on your Pull Request if this test reveals an error.
 Check its output logs to ensure the errors are not caused by
 your modification.
+
+Manual checking can be done through Docker. A minimal image with `httpd` can be built from the provided `Dockerfile`. (It is identical to the official `httpd` image, but with `mod_rewrite` enabled.) A `httpd` service with the local redirect rules can be started with this command:
+
+```sh
+docker run -dit --rm --name w3id-test -p 8080:80 -v "$PWD":/usr/local/apache2/htdocs/ w3id
+```
+
+One can then test URIs by replacing `https://w3id.org/` with `http://localhost:8080/` and check if the redirects work as expected.
 
 ### Naming Policy
 
